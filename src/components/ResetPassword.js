@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+const API_BASE_URL = 'http://localhost:5000'; // Your backend URL
 
 const ResetPassword = () => {
   const { token } = useParams();
@@ -36,7 +37,7 @@ const ResetPassword = () => {
     setLoading(true);
 
     try {
-      await axios.post(`/api/auth/reset-password/${token}`, {
+      await axios.post(`${API_BASE_URL}/api/auth/reset-password/${token}`, {
         password: formData.password
       });
       

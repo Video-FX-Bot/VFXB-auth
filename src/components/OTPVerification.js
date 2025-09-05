@@ -3,6 +3,8 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import OTPInput from './OTPInput';
 import axios from 'axios';
 
+const API_BASE_URL = 'http://localhost:5000'; // Your backend URL
+
 const OTPVerification = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -30,7 +32,7 @@ const OTPVerification = () => {
     setError('');
 
     try {
-      const response = await axios.post('/api/auth/verify-otp', {
+      const response = await axios.post(`${API_BASE_URL}/api/auth/verify-otp`, {
         email,
         otp: otpValue
       });
@@ -52,7 +54,7 @@ const OTPVerification = () => {
     setError('');
 
     try {
-      await axios.post('/api/auth/resend-otp', { email });
+      await axios.post(`${API_BASE_URL}/api/auth/resend-otp`, { email });
       setTimer(30);
       setCanResend(false);
       alert('OTP has been resent to your email');
